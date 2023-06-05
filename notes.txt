@@ -1,0 +1,17 @@
+Build docker image base Dickerfile in root
+$ docker build .
+
+Run docker container from image. You can use only few first ID sympols like "f5dffbb96bb3ad76ef4c7"
+$ docker run f5dffbb96bb3ad76ef4c781f96db877dd57d570ef672a77b6bb7e3651b9a32a2
+
+Get all running docker containers
+$ docker ps
+
+Get all existing docker containers
+$ docker ps -a
+
+Stop container by name
+$ docker stop friendly_elion
+
+Expose/Publish(-p) local port 3000 (which port shpould be accessable) with internal port 80 inside container
+$ docker run -p 3000:80 ae4e16965ad800a7faa8f07d66148249fe68daa88344938616207a3b3e7fdbfb

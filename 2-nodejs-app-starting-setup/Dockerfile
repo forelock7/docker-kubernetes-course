@@ -13,10 +13,11 @@ COPY . /app
 RUN npm install
 
 # Let docker know that when container starts we want to expose port 80 to local machine, which runs this contaier
+# It just clarifes port, but actually does nothing
 EXPOSE 80
 
 # It starts app during image creation/building, but it's inncorrect because image is just template. Do not do it!
 # RUN node server.js
 
 # It runs command only during start of container
-CMD ["node" "server.js"]
+CMD ["node", "server.js"]
