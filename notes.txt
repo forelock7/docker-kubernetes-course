@@ -13,8 +13,31 @@ $ docker ps -a
 Stop container by name
 $ docker stop friendly_elion
 
-Expose/Publish(-p) local port 3000 (which port shpould be accessable) with internal port 80 inside container
+Create NEW container and Expose/Publish(-p) local port 3000 (which port shpould be accessable) with internal port 80 inside container
 $ docker run -p 3000:80 ae4e16965ad800a7faa8f07d66148249fe68daa88344938616207a3b3e7fdbfb
 
 Docker caches all instruction. It re-builds only changed layer. Therefore it can re-builds faster second time than very first.
 If one layer changed, Docker re-executes this one and all following.
+Every instruction in an image creates a cacheable layer.
+
+Check available option for cirtain commands
+$ docker COMMAND --help
+$ docker build --help 
+
+Start existing container, which was stopped before. Do not need create new container(docker run ...) if you didn't change image.
+$ docker start container_name
+
+Attached mode - default for 'docker run'. Listening output of container, for example consol output.
+$ docker run image_id
+$ docker start -a container_name
+$ docker attach container_name
+
+Detached mode - default for 'docker start'. The process in terminal finishes immediately. The container is running in the background.
+$ docker start container_name
+$ docker run -d container_name
+
+See the last logs in container
+$ docker logs container_name
+
+See the last logs and follow log output in container
+$ docker logs -f container_name
