@@ -4,13 +4,16 @@ FROM node
 # Change working dir to '/app'(create '/app' and go inside it), which means that all further commands will be executed from '/app'
 WORKDIR /app
 
+# Optimization for executing layers. First install all depandancies then coppy all code source in case code would be changed
+COPY package.json /app
+
+# Run command
+RUN npm install
+
 # Copy all files/folders from '.' path (root, where Dockerfile exists) to '.' path (root) in container
 # COPY . .
 # if WORKDIR set up we can use either 'COPY . .' or 'COPY . ./' or 'COPY . /app'
 COPY . /app
-
-# Run command
-RUN npm install
 
 # Let docker know that when container starts we want to expose port 80 to local machine, which runs this contaier
 # It just clarifes port, but actually does nothing
