@@ -25,19 +25,19 @@ $ docker COMMAND --help
 $ docker build --help 
 
 Start existing container, which was stopped before. Do not need create new container(docker run ...) if you didn't change image.
-$ docker start container_name
+$ docker start container_name_id
 
 Attached mode - default for 'docker run'. Listening output of container, for example consol output.
 $ docker run image_id
-$ docker start -a container_name
-$ docker attach container_name
+$ docker start -a container_name_id
+$ docker attach container_name_id
 
 Detached mode - default for 'docker start'. The process in terminal finishes immediately. The container is running in the background.
-$ docker start container_name
-$ docker run -d container_name
+$ docker start container_name_id
+$ docker run -d container_name_id
 
 See the last logs in container
-$ docker logs container_name
+$ docker logs container_name_id
 
 See the last logs and follow log output in container
-$ docker logs -f container_name
+$ docker logs -f container_name_id
