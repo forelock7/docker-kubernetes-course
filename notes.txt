@@ -41,3 +41,9 @@ $ docker logs container_name_id
 
 See the last logs and follow log output in container
 $ docker logs -f container_name_id
+
+Allocate a pseudo-TTY and keep STDIN open even if not attached. So we can input something via console if app needs.
+$ docker run -it e38a6e781747027fb1ceefe9fa
+
+Start container with open STDIN(--attach and --interactive)
+$ docker start -a -i awesome_fermi
