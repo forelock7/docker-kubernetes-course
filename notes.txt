@@ -74,3 +74,11 @@ $ docker cp dummy/file.txt container_name:/app/test
 
 Copy file from docker container to local machine
 $ docker cp container_name:/app/test dummy/file.txt
+
+Run/Create container with name 'goalsapp'
+docker run -p 3000:80 -d --rm --name goalsapp 138689ba48485b88d3b8befe3952a1aa
+
+Image tag: "<name>:<tag>". For example "node:12"
+-t Name and optionally a tag (format: "name:tag")
+docker build -t goals:latest .
+docker run -p 3001:80 -d --rm --name goalsapp2 goals:latest
