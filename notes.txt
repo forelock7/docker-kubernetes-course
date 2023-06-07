@@ -1,84 +1,94 @@
-Build docker image base Dickerfile in root
-$ docker build .
+- Build docker image base Dickerfile in root
+docker build .
 
-Run docker container from image. You can use only few first ID sympols like "f5dffbb96bb3ad76ef4c7"
-$ docker run f5dffbb96bb3ad76ef4c781f96db877dd57d570ef672a77b6bb7e3651b9a32a2
+- Run docker container from image. You can use only few first ID sympols like "f5dffbb96bb3ad76ef4c7"
+docker run f5dffbb96bb3ad76ef4c781f96db877dd57d570ef672a77b6bb7e3651b9a32a2
 
-Get all running docker containers
-$ docker ps
+- Get all running docker containers
+docker ps
 
-Get all existing docker containers
-$ docker ps -a
+- Get all existing docker containers
+docker ps -a
 
-Stop container by name
-$ docker stop friendly_elion
+- Stop container by name
+docker stop friendly_elion
 
-Create NEW container and Expose/Publish(-p) local port 3000 (which port shpould be accessable) with internal port 80 inside container
-$ docker run -p 3000:80 ae4e16965ad800a7faa8f07d66148249fe68daa88344938616207a3b3e7fdbfb
+- Create NEW container and Expose/Publish(-p) local port 3000 (which port shpould be accessable) with internal port 80 inside container
+docker run -p 3000:80 ae4e16965ad800a7faa8f07d66148249fe68daa88344938616207a3b3e7fdbfb
 
-Docker caches all instruction(lines in Dockerfile). It re-builds only changed layer. Therefore it can re-builds faster second time than very first.
-If one layer changed, Docker re-executes this one and all following.
-Every instruction in an image creates a cacheable layer.
+- Docker caches all instruction(lines in Dockerfile). It re-builds only changed layer. Therefore it can re-builds faster second time than very first.
+- If one layer changed, Docker re-executes this one and all following.
+- Every instruction in an image creates a cacheable layer.
 
-Check available option for cirtain commands
-$ docker COMMAND --help
-$ docker build --help 
+- Check available option for cirtain commands
+docker COMMAND --help
+docker build --help 
 
-Start existing container, which was stopped before. Do not need create new container(docker run ...) if you didn't change image.
-$ docker start container_name_id
+- Start existing container, which was stopped before. Do not need create new container(docker run ...) if you didn't change image.
+docker start container_name_id
 
-Attached mode - default for 'docker run'. Listening output of container, for example consol output.
-$ docker run image_id
-$ docker start -a container_name_id
-$ docker attach container_name_id
+- Attached mode - default for 'docker run'. Listening output of container, for example consol output.
+docker run image_id
+docker start -a container_name_id
+docker attach container_name_id
 
-Detached mode - default for 'docker start'. The process in terminal finishes immediately. The container is running in the background.
-$ docker start container_name_id
-$ docker run -d container_name_id
+- Detached mode - default for 'docker start'. The process in terminal finishes immediately. The container is running in the background.
+docker start container_name_id
+docker run -d container_name_id
 
-See the last logs in container
-$ docker logs container_name_id
+- See the last logs in container
+docker logs container_name_id
 
-See the last logs and follow log output in container
-$ docker logs -f container_name_id
+- See the last logs and follow log output in container
+docker logs -f container_name_id
 
-Allocate a pseudo-TTY and keep STDIN open even if not attached. So we can input something via console if app needs.
-$ docker run -it e38a6e781747027fb1ceefe9fa
+- Allocate a pseudo-TTY and keep STDIN open even if not attached. So we can input something via console if app needs.
+docker run -it e38a6e781747027fb1ceefe9fa
 
-Start container with open STDIN(--attach and --interactive)
-$ docker start -a -i awesome_fermi
+- Start container with open STDIN(--attach and --interactive)
+docker start -a -i awesome_fermi
 
-Remove container, but you need to stop it before
-$ docker stop container_name_id
-$ docker rm container_name_1 container_name_2 container_name_3
+- Remove container, but you need to stop it before
+docker stop container_name_id
+docker rm container_name_1 container_name_2 container_name_3
 
-Get list of all images
-$ docker images
+- Get list of all images
+docker images
 
-Remove images, but you need to remove container before
-$ docker rmi e38a6e781747
+- Remove images, but you need to remove container before
+docker rmi e38a6e781747
 
-Remove all unused images
-$ docker image prune
+- Remove all unused images
+docker image prune
 
-Automatically remove the container (--rm) when it exits (in case below it will be removed after stoping)
-Actually usefull when you need to rebuild image after some changes
-$ docker run -p 3000:80 -d --rm 138689ba4848
-$ docker stop busy_moser
+- Automatically remove the container (--rm) when it exits (in case below it will be removed after stoping)
+- Actually usefull when you need to rebuild image after some changes
+docker run -p 3000:80 -d --rm 138689ba4848
+docker stop busy_moser
 
-Display detailed information on one or more images
-$ docker image inspect 138689ba4848
+- Display detailed information on one or more images
+docker image inspect 138689ba4848
 
-Copy file from local machine to docker container
-$ docker cp dummy/file.txt container_name:/app/test
+- Copy file from local machine to docker container
+docker cp dummy/file.txt container_name:/app/test
 
-Copy file from docker container to local machine
-$ docker cp container_name:/app/test dummy/file.txt
+- Copy file from docker container to local machine
+docker cp container_name:/app/test dummy/file.txt
 
-Run/Create container with name 'goalsapp'
+- Run/Create container with name 'goalsapp'
 docker run -p 3000:80 -d --rm --name goalsapp 138689ba48485b88d3b8befe3952a1aa
 
-Image tag: "<name>:<tag>". For example "node:12"
+- Image tag: "<name>:<tag>". For example "node:12"
 -t Name and optionally a tag (format: "name:tag")
 docker build -t goals:latest .
 docker run -p 3001:80 -d --rm --name goalsapp2 goals:latest
+
+- Rename image name:tag 
+docker tag nodeapp:latest forelock/node-hello-world:latest
+
+- Push docker image to hub.docker.commands (create before repo on docker hub)
+docker login
+docker push forelock/node-hello-world:latest
+
+- Pull image from hub.docker.com
+docker pull forelock/node-hello-world
