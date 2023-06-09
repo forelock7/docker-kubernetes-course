@@ -11,6 +11,6 @@ COPY . .
 EXPOSE 80
 
 # Anonymous volume. It will be deleted if remove container
-VOLUME [ "/app/feedback" ]
+# VOLUME [ "/app/feedback" ]
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]

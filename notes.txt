@@ -133,3 +133,29 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feed
 - Delete volume
 docker volume rm VOL_NAME
 docker volume prune
+
+- Type of data storage: Volumes(Anonymous and Named - managed by docker) and Bind Mounts(Managed by you)
+- check before resources are shared with docker(local dir should be shared - Docker Desktop/settings/resources
+- Anonymous Volume: "-v /app/node_modules" - overides particular dirs (if their more specific) from Bind Mount to save something that was created during image building
++ 1) Created specifically for a single container
++ 2) Survives container shutdown / restart - unless --rm is used
++ 3) Can not be shared across containers
++ 4) Since it's anonymous, it can't be re-used for same container (even same image)
+- Named Volume: "-v feedback:/app/feedback" - for saving results when we stop/remove containers.
++ 1) Created in general - not tied to any specific container
++ 2) Survives container shutdown / restart - removal via Docker clarifes
++ 3) Can be shared across containers
++ 4) Can be re-used for same container (across restarts)
+- Bind Mount: "-v "/Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/5-data-volumes-01-starting-setup:/app""" - for using code outside container, helps us to update code and do not re-build image.
++ 1) Location on host file system, not tied to any sppecific container
++ 2) Survives container shutdown / restart - removal on host fs
++ 3) Can be shared across containers
++ 4) Can be re-used for same container (across restarts)
+- In this case DO NOT NEED VOLUME instaraction in Dockerfile
+docker run -d --rm -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/.../5-data-volumes-01-starting-setup:/app" -v /app/node_modules feedback-node:volumes
+
+- Shortcuts:
+macOS / Linux: -v $(pwd):/app
+Windows: -v "%cd%":/app
+
+- If we use some specific project like web-server on node.js, we might need to stop and start container again to apply some changes: use dependancy kind of "nodemon"
