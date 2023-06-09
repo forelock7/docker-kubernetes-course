@@ -17,10 +17,16 @@ COPY . /app
 
 # Let docker know that when container starts we want to expose port 80 to local machine, which runs this contaier
 # It just clarifes port, but actually does nothing
-EXPOSE 80
+# EXPOSE 80
 
-# Anonymous volume. It will be deleted if remove container
-VOLUME [ "/app/feedback" ]
+# Set environmental variable and default value
+ENV PORT 80
+
+# Use environmental variable PORT
+EXPOSE $PORT
+
+# Anonymous volume. It will be deleted if remove container. Can be provided during 'docker run -v /app/feedback'  
+# VOLUME [ "/app/feedback" ]
 
 # It starts app during image creation/building, but it's inncorrect because image is just template. Do not do it!
 # RUN node server.js
@@ -178,3 +184,9 @@ docker volume prune
 - Mostly Bind Mount is not used in production. It just needed for development
 
 - To ignore some files/dirs during 'COPY' instruction need to add them to '.dockerignore' file
+
+- propagate env vars we can use '--env PORT=8000' or '-e PORT=8000 -e HOST=10.32.43.21' in case "ENV PORT 80; EXPOSE $PORT;" in Dockerfile
+docker run -d --rm -p 3000:8000 --env PORT=8000 --name feedback-app -v feedback:/app/feedback -v "/Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/5-data-volumes-01-starting-setup:/app:ro" -v /app/temp -v /app/node_modules feedback-node:env
+
+- '.env' file can be also created with env vars, but then you need to use '--env-file ./.env' if it's in root
+docker run -d --rm -p 3000:8001 --env-file ./.env .....
