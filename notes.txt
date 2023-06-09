@@ -159,3 +159,22 @@ macOS / Linux: -v $(pwd):/app
 Windows: -v "%cd%":/app
 
 - If we use some specific project like web-server on node.js, we might need to stop and start container again to apply some changes: use dependancy kind of "nodemon"
+
+- Bind Mount Volume is in read/write mode. It can be made as read only by adding ':ro' to the end. So we exclude '/app/temp' and '/app/node_modules' from Bind Mount
+docker run -d --rm -p 3000:80 --name feedback-app -v feedback:/app/feedback -v "/Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/5-data-volumes-01-starting-setup:/app:ro" -v /app/temp -v /app/node_modules feedback-node:volumes
+
+- Create Named Volume
+docker volume create feedback-files
+
+- Get infor about volume:
+docker volume inspect feedback-files
+
+- Remove volume if unused (need to stop/remove container before)
+docker volume rm feedback-files
+
+- Remove all unused volumes
+docker volume prune
+
+- Mostly Bind Mount is not used in production. It just needed for development
+
+- To ignore some files/dirs during 'COPY' instruction need to add them to '.dockerignore' file
