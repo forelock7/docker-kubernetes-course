@@ -70,7 +70,7 @@ app.get("/people", async (req, res) => {
 mongoose.connect(
   // Set ip address of mongo db in container
   // docker container inspect mongodb
-  "mongodb://172.17.0.2:27017/swfavorites",
+  "mongodb://mongodb:27017/swfavorites",
   { useNewUrlParser: true },
   (err) => {
     if (err) {
