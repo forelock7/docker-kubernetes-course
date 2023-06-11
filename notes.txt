@@ -230,3 +230,25 @@ docker network create --driver bridge my-net
 + none: All networking is disabled.
 - Third-party plugins: You can install third-party plugins which then may add all kinds of behaviors and functionalities
 - As mentioned, the "bridge" driver makes most sense in the vast majority of scenarios.
+
+- Multi-container 
+docker run --name mongodb --rm -d -p 27017:27017 mongo
+docker build -t goals-node .
+docker run --name goals-backend --rm -d -p 80:80 goals-node
+docker build -t goals-react .
+docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
+docker network create goals-net
+docker run --name mongodb --rm -d --network goals-net mongo
+// change in backend code localhosts to docker container name and re-build images
+// still need to publish port 80 because frontend will reach from not container, but from outside - browser
+docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+docker run --name goals-frontend --rm -p 3000:3000 -it goals-react 
+
+- Persist data after removing of mongodb
+docker run --name mongodb -v data:/data/db -d --rm --network goals-net mongo
+
+- Add authontification to DB, but before update code in backend "mongodb://max:secret@mongodb:27017/course-goals?authSource=admin"
+- Remove volume for DB before
+docker volume rm data
+docker run --name mongodb -v data:/data/db -d --rm --network goals-net -e MONGO_INITDB_ROOT_USERNAME=max -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+docker run --name goals-backend --rm -p 80:80 --network goals-net goals-node
