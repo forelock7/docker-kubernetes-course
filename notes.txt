@@ -197,3 +197,13 @@ docker run -d --rm -p 3000:8001 --env-file ./.env .....
 - Build Arguments is used to set different values during build image (ARG DEFAULT_PORT=80; ENV PORT $DEFAULT_PORT; EXPOSE $PORT;)
 docker build -t feedback-node:web-app .    (applied 80 port)
 docker build -t feedback-node:dev-app --build-arg DEFAULT_PORT=8000 .  (applied 8000 port)
+
+- Coonection to WEB: Docker container can communicate with WWW without additional configuration
+
+- Connection to Host: If you have locally DB, out of Docker, You should use in Docker instead of 'localhost': 'host.docker.internal'
+- For instance: 'mongodb://host.docker.internal:27017/swfavorites'
+
+- Connection to other contaier
+
+- Get info about container
+docker container inspect mongodb
