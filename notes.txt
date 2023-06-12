@@ -262,3 +262,9 @@ docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Cours
 + add env vars in Dockerfile: ENV MONGODB_USERNAME=root \ ENV MONGODB_PASSWORD=secret
 + rebuild image and re-run container
 docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/7-multi-01-starting-setup/backend:/app -v logs:/app/logs -v /app/node_modules --name goals-backend --rm -d -e MONGODB_USERNAME=max -p 80:80 --network goals-net goals-node
+
+- Run frontend app with possibility to change code on flight
+docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/7-multi-01-starting-setup/frontend/src:/app/src --name goals-frontend --rm -p 3000:3000 -it goals-react
+
+- To improve image building
++ Add '.dockerignore' file and add at least: node_modules, .git, Dockerfile
