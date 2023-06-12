@@ -252,3 +252,13 @@ docker run --name mongodb -v data:/data/db -d --rm --network goals-net mongo
 docker volume rm data
 docker run --name mongodb -v data:/data/db -d --rm --network goals-net -e MONGO_INITDB_ROOT_USERNAME=max -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
 docker run --name goals-backend --rm -p 80:80 --network goals-net goals-node
+
+- Run backend app with saving logs dir and possibility to change code on flight
+docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/7-multi-01-starting-setup/backend:/app -v logs:/app/logs -v /app/node_modules --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+- Add to dev dep 'nodemon', update start script and Dockerfile, re-build image and re-run container
+
+- Set username/password as env variable
++ replace it in code by `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`
++ add env vars in Dockerfile: ENV MONGODB_USERNAME=root \ ENV MONGODB_PASSWORD=secret
++ rebuild image and re-run container
+docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/7-multi-01-starting-setup/backend:/app -v logs:/app/logs -v /app/node_modules --name goals-backend --rm -d -e MONGODB_USERNAME=max -p 80:80 --network goals-net goals-node
