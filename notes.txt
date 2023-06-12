@@ -133,6 +133,10 @@ docker push forelock/node-hello-world:latest
 - Pull image from hub.docker.com
 docker pull forelock/node-hello-world
 
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 3: Managing Data & Working with Volumes
+////////////////////////////////////////////////////////////////////////////////////////////
+
 - Get list of volumes
 docker volume ls
 
@@ -198,6 +202,10 @@ docker run -d --rm -p 3000:8001 --env-file ./.env .....
 docker build -t feedback-node:web-app .    (applied 80 port)
 docker build -t feedback-node:dev-app --build-arg DEFAULT_PORT=8000 .  (applied 8000 port)
 
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 4: Networking: (Cross-)Container Communication
+////////////////////////////////////////////////////////////////////////////////////////////
+
 - Coonection to WEB: Docker container can communicate with WWW without additional configuration
 
 - Connection to Host: If you have locally DB, out of Docker, You should use in Docker instead of 'localhost': 'host.docker.internal'
@@ -230,6 +238,10 @@ docker network create --driver bridge my-net
 + none: All networking is disabled.
 - Third-party plugins: You can install third-party plugins which then may add all kinds of behaviors and functionalities
 - As mentioned, the "bridge" driver makes most sense in the vast majority of scenarios.
+
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 5: Building Multi-Container Applications with Docker
+////////////////////////////////////////////////////////////////////////////////////////////
 
 - Multi-container 
 docker run --name mongodb --rm -d -p 27017:27017 mongo
@@ -268,3 +280,7 @@ docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Cours
 
 - To improve image building
 + Add '.dockerignore' file and add at least: node_modules, .git, Dockerfile
+
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 6: Docker Compose: Elegant Multi-Container Orchestration
+////////////////////////////////////////////////////////////////////////////////////////////
