@@ -3,7 +3,7 @@ services:
   mongodb:
     image: "mongo"
     volumes:
-      - data: /data/db
+      - data:/data/db
     environment:
       # Option 1 for env var
       - MONGO_INITDB_ROOT_USERNAME=max
