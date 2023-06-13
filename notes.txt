@@ -284,3 +284,15 @@ docker run -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Cours
 ////////////////////////////////////////////////////////////////////////////////////////////
 Section 6: Docker Compose: Elegant Multi-Container Orchestration
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+- One configuration File + Orchestration Commands (build, start? stop)
+- Docker Compose works with Dockerfile
+- Services (Containers):
++ Published Ports
++ Volumes
++ Env vars
++ Networks
+
+- docker-compose version - https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+- Do not need specify network because docker compose provide that default network out of the box

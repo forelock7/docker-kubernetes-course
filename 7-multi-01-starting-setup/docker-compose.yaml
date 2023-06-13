@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data: /data/db
+    environment:
+      # Option 1 for env var
+      - MONGO_INITDB_ROOT_USERNAME=max
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      # Option 2 for env var
+      # MONGO_INITDB_ROOT_PASSWORD: secret
+    # Option 3 for env var
+    # env_file:
+    #   - ./env/mongo.env
+  # backend:
+  # frontend:
+
+# Only Named volumes should be specofied here
+volumes:
+  data:
