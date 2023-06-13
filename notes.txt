@@ -318,5 +318,8 @@ docker-compose down
 - Down docker-compose: remove not only container and network, but volumes
 docker-compose down -v
 
-- Up docker-compose and force re-building of images
+- Up docker-compose and force re-building of images (commonly docker-compose doesn't build images if their built before)
 docker-compose up --build
+
+- Build images by docker-compose
+docker-compose build
