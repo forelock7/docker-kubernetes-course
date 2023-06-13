@@ -323,3 +323,22 @@ docker-compose up --build
 
 - Build images by docker-compose
 docker-compose build
+
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 7: Working with "Utility Containers" & Executing Commands In Containers
+////////////////////////////////////////////////////////////////////////////////////////////
+
+- Execute some commands inside container BESIDES default command of container
+docker run -it -d node
+docker exec -it docker_container npm init
+
+- Execute some commands inside container OVERRIDE default command of container
+docker run -it node npm init
+
+- Create Utility image
+FROM node:14-alpine
+WORKDIR /app
+docker build -t node-util .
+
+- Run node-util container with Bind Mount. It help us to use containers and work with a project as standalone, without any aditional installation on local machine
+docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app node-util npm init
