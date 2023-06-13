@@ -36,7 +36,15 @@ services:
       # mongodb service should up and running before
       - mongodb
 
-  # frontend:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    # set 'stdin_open' and 'tty' to 'true' to replace common 'it' mode
+    stdin_open: true
+    tty: true
 
 # Only Named volumes should be specofied here
 volumes:
