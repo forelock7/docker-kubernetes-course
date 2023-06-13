@@ -13,9 +13,32 @@ services:
     # Option 3 for env var
     # env_file:
     #   - ./env/mongo.env
-  # backend:
+  backend:
+    build: ./backend
+    # Use below if you have dockerfile with different name as Dockerfile-dev instead of Dockerfile
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile-dev
+    #   args:
+    #     some-arg: 1
+    ports:
+      - "80:80"
+    volumes:
+      # Named volume
+      - logs:/app/logs
+      # Bind Mount
+      - ./backend:/app
+      # Anonimous volume
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      # mongodb service should up and running before
+      - mongodb
+
   # frontend:
 
 # Only Named volumes should be specofied here
 volumes:
   data:
+  logs:
