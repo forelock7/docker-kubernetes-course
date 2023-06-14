@@ -346,6 +346,17 @@ docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-C
 
 - If we have 'ENTRYPOINT ["npm"]', console command will be appended to "npm". Container is always shut down after execution, but we can run other command because Bind Mount
 docker build -t mynpm .
-docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm init
-docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install
-docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install express --save
+docker run -rm -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm init
+docker run -rm -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install
+docker run -rm -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install express --save
+
+- The same we can do with docker-compose
+version: "3.8"
+services:
+  npm_service:
+    build: ./
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+docker-compose run --rm npm_service init
