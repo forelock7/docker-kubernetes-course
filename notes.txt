@@ -341,4 +341,11 @@ WORKDIR /app
 docker build -t node-util .
 
 - Run node-util container with Bind Mount. It help us to use containers and work with a project as standalone, without any aditional installation on local machine
+- If we have 'CMD ["npm", "install"]', this command will be overrided by command in console command
 docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app node-util npm init
+
+- If we have 'ENTRYPOINT ["npm"]', console command will be appended to "npm". Container is always shut down after execution, but we can run other command because Bind Mount
+docker build -t mynpm .
+docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm init
+docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install
+docker run -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install express --save
