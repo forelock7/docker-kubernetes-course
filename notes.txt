@@ -364,3 +364,16 @@ docker-compose run --rm npm_service init
 ////////////////////////////////////////////////////////////////////////////////////////////
 Section 8: A More Complex Setup: A Laravel & PHP Dockerized Project
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+- If there is no execution command in dockerfile (CMD, ENTRYPOINT), so execution command will be taken from base image
+
+- Specific dockerfile (with different name) placed not in the root of project:
+services:
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+
+- To improve performance during using of Bind Mount: ':delegated' option
+    volumes:
+      -./src:/var/www/htm:delegated
