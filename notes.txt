@@ -350,7 +350,7 @@ docker run -rm -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernet
 docker run -rm -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install
 docker run -rm -it -v /Users/volodymyrchubenko/Documents/Courses/Docker-Kubernetes-Course/8-utility-containers:/app mynpm install express --save
 
-- The same we can do with docker-compose
+- The same we can do with docker-compose (Run only one particular container from docker-compose)
 version: "3.8"
 services:
   npm_service:
@@ -377,3 +377,6 @@ services:
 - To improve performance during using of Bind Mount: ':delegated' option
     volumes:
       -./src:/var/www/htm:delegated
+
+- Run comoser of php project
+docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
