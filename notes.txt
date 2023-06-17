@@ -379,4 +379,29 @@ services:
       -./src:/var/www/htm:delegated
 
 - Run comoser of php project
-docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
+docker-compose run --rm composer create-project --prefer-dist laravel/laravel:^8.0 .
+
+- Run particular services(containers) from docker-compose file:
+docker-compose up -d server php mysql
+
+- Dependent services can be added to run only by one service, but depended services weren't build
+  server:
+    image: "nginx:stable-alpine"
+    .....
+    depends_on:
+      - php
+      - mysql
+docker-compose up -d --build server
+
+- Run dependent services by one service with re-/building their images
+docker-compose up -d --build server
+
+- ENTRYPOINT instruction in Dockerfile can be override in docker-compose
+  artisan:
+    build:
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ['php', '/var/www/html/artisan']
+docker-compose run --rm artisan migrate
