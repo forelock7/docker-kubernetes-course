@@ -405,3 +405,14 @@ docker-compose up -d --build server
       - ./src:/var/www/html
     entrypoint: ['php', '/var/www/html/artisan']
 docker-compose run --rm artisan migrate
+
+- Best practice to keep docker-compose and dockerfiles in project, not use docker-compose file without dockerfile
+
+- Context means not only where Dockerfile is, but also where should docker image build
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.dockerfile
+    ......
+    build:
+      context: ./dockerfiles
+      dockerfile: composer.dockerfile
