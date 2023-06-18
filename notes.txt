@@ -429,3 +429,10 @@ sudo usermod -a -G docker ec2-user
 *log out and log in once more
 sudo systemctl enable docker
 docker version
+
+- To have access to AWS need to add security group for http - port 80
+
+- To update image remotely, need to stop container, pull new latest version of image and re-run container
+docker stop 207978fa836c
+docker pull forelock/node-example-1
+docker run -d --rm -p 80:80 forelock/node-example-1
