@@ -417,11 +417,11 @@ docker-compose run --rm artisan migrate
       context: ./dockerfiles
       dockerfile: composer.dockerfile
 
-- AWS first login via SSH, but coppy '.pem' file to the root of project (see the instruction in AWS how to connect to VM)
+- AWS first login via SSH, but coppy '.pem' file to the root of project (see the instruction in AWS EC2 how to connect to VM)
 chmod 400 example-1.pem
 ssh -i "example-1.pem" ec2-user@ec2-16-171-65-79.eu-north-1.compute.amazonaws.com
 
-- Install docker to AWS machine
+- Install docker to AWS EC2 machine
 sudo yum update -y
 sudo yum -y install docker
 sudo service docker start
@@ -430,7 +430,7 @@ sudo usermod -a -G docker ec2-user
 sudo systemctl enable docker
 docker version
 
-- To have access to AWS need to add security group for http - port 80
+- To have access to AWS EC2 need to add security group for http - port 
 
 - To update image remotely, need to stop container, pull new latest version of image and re-run container
 docker stop 207978fa836c
