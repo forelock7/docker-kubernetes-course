@@ -436,3 +436,17 @@ docker version
 docker stop 207978fa836c
 docker pull forelock/node-example-1
 docker run -d --rm -p 80:80 forelock/node-example-1
+
+- Multistage build(dockerfile). For production we need not start frontend application, but build it(see scripts in package.json). Dockerfile.prod is created for this.
+FROM node:14-alpine as build
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
+RUN npm run build
+// Create new stage
+FROM nginx:stable-alpine
+// Copy files from 'build' stage
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
