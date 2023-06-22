@@ -456,3 +456,45 @@ docker build -f frontend/Dockerfile.prod ./frontend
 
 - Build specific stage (see previouse Dockerfile example)
 docker build --target build ....
+
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 11: Getting Started with Kubernetes
+////////////////////////////////////////////////////////////////////////////////////////////
+
+- Kubernetes for orchestrating containers deployment
++ Check container's health
++ Scaling number of containers
++ Balance load between the same containers
+
+- Kubernetes is like Docker-Compose for multiple machines
+
+- Pod holds container and volume. Can contain also mutiple containers
+- Worker Node contains Pod(Container) and Proxy/Config. Nodes are your machine/virtual instances
+- Multiple Pods can be created and removed to scale app
+- Master Node is The Control Plane (control other Worker Nodes)
+- Master and Worker Nodes create a cluster
+
+- Worker Node, Pods are created by Kubernetes
+
+- Worker Node contains:
++ Pod/s (Container/s + Volume/s)
++ kubelet - communication between Master and Worker Node
++ Docker
++ kube-proxy - managed Node and Pod network communication
+
+
+- Master Node
++ API server - API for the kubelets to communicate
++ Scheduler - watches for new Pods, selects Worker Nodes to run them on
++ Kube-Controller-Manager - watches and controls Worker Nodes, correct number of Pods and more
++ Cloud-Controller-Manager - like Kube-Controller-Manager BUT for a specific Cloud Provider: knows how to interact with Cloud Provider resources
+
+- Cluster - set of Node machines which are running the Containerized Application (Worker Nodes) or cotrol other Nodes (Master Node)
+- Nodes (Master/Worker) - Physical or virtual machine with a certain hardware capacity which hosts one or mutiple Pods and communicates with the Cluster
+- Pods - hold the actual running App Container + their required resources (e.g. volumes)
+- Containers - Normal Docker Containers
+- Services - a logical set (group) of Pods with a unique, Pod- and Container- independent IP address
+
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 12: Kubernetes in Action - Diving into the Core Concepts
+////////////////////////////////////////////////////////////////////////////////////////////
