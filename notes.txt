@@ -498,3 +498,29 @@ Section 11: Getting Started with Kubernetes
 ////////////////////////////////////////////////////////////////////////////////////////////
 Section 12: Kubernetes in Action - Diving into the Core Concepts
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+- Kubermatic - tool that can help to creat all required infrustructure of Kubernetes
+- Kubernetes does not create infrustructure. It just manages it.
+- kubectl - tool - sends instruction to the cluster (a new deployment). Master Node applies those command to Worker Nodes
+- Minikube - tool helps run kubernetes locally
+
+- kubectl installation with Homebrew (https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)
+brew install kubectl
+- Test installation
+kubectl version --client
+
+- Install Hypervisor, for instance: VirtualBox(https://www.virtualbox.org/)
+
+- Install Minicube (https://minikube.sigs.k8s.io/docs/start/)
+brew install minikube
+- Start minikube 
+minikube start (by default in docker driver - prefered!!!!0
+minikube start --driver=docker
+minikube start --driver=virtualbox (unsupported on macOS >13)
+- Check status after installation
+minikube status
+- Minikube dashboard
+minikube dashboard
+- Delete all minikube clusters
+minikube delete --all
+
