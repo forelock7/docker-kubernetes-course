@@ -610,4 +610,9 @@ kubectl delete deployment first-app
 - Look at internet which latest apiVersion should be used for deployment yaml (apiVersion: apps/v1)
 
 - Create deployment based on configuration file
-kubectl apply -f=deployment.yaml
+kubectl apply -f deployment.yaml
+
+- Create Service by config file:
+kubectl apply -f service.yaml
+kubectl get services
+minikube service backend

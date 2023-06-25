@@ -7,11 +7,15 @@ spec:
   selector:
     matchLabels:
       app: second-app
+      # tier: backend
   template:
     metadata:
       labels:
         app: second-app
+        # tier: backend
     spec:
       containers:
         - name: second-node
           image: forelock/kub-first-app:2
+        # - name: ...
+        #   image: ...
