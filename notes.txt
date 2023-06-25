@@ -590,6 +590,12 @@ docker push forelock/kub-first-app:2
 kubectl set image deployment/first-app kub-first-app=forelock/kub-first-app:2
 // view/check updating status
 kubectl rollout status deployment/first-app
+- Note if you use config file just choose one from next option for not specifying version
+1
+image: forelock/kub-first-app:latest
+2
+image: forelock/kub-first-app
+          imagePullPolicy: Always
 
 - Roll back bad changes after setting them into deployment:
 kubectl rollout undo deployment/first-app

@@ -20,7 +20,10 @@ spec:
     spec:
       containers:
         - name: second-node
-          image: forelock/kub-first-app:2
+          image: forelock/kub-first-app:latest
+          # User ':latest' or next code to always pull image
+          # image: forelock/kub-first-app
+          # imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /
