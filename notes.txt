@@ -524,3 +524,85 @@ minikube dashboard
 - Delete all minikube clusters
 minikube delete --all
 
+- Kubernetes works with Objects:
++ Pods
++ Deployments
++ Services
++ Volume, etc
+
+- Kubernetes objects can be created Imperatively or Declaratively
+ 
+- 'Pod' - smallest utit of Kubernetes
++ contains and run one or multiple containers (commonly 1 pod = 1 container)
++ contains shared resources (e.g. volumes)
++ has a cluster-internal IP by default (containers in pod can use 'localhost')
+
+- 'Deployment' - controls (multiple) Pods. It is used to set up the desired end state
++ set a desired state, Kebernetes then changes the actual state. Define which Pods and containers to run and the number of instances
++ can be paused, deleted and rolled backend
++ can be scaled dynamically and automatically. You can change the number of desired Pods as needed
+
+- Deploy first simple app in kubernetes(12 module)
+cd 12-<module></module>...
+docker build -t kub-first-app .
+// create first remote repo on docker registry - forelock/kub-first-app, because minikube works ONLY WITH REMOTE repos!!!
+docker tag kub-first-app forelock/kub-first-app
+docker push forelock/kub-first-app
+kubectl create deployment first-app --image=forelock/kub-first-app
+kubectl get deployments
+kubectl get pods
+
+- 'Service' - exposes Pods to the Cluster or Externally. Pods have an internal IP by default - it changes when a Pod is replaced, so:
++ group Pods with a shared IP
++ can allow external access to Pods (default internal only)
+
+- Create Service and expose port from container
+kubectl expose deployment first-app --type=LoadBalancer --port=8080
+kubectl get services
+
+- type of exposing:
++ --type=ClusterIP (by default and created automatically)
++ --type=NodePort
++ --type=LoadBalancer 
+
+- Open deployed app locally run following command and get :
+minikube service first-app
+|-----------|-----------|-------------|---------------------------|
+| NAMESPACE |   NAME    | TARGET PORT |            URL            |
+|-----------|-----------|-------------|---------------------------|
+| default   | first-app |        8080 | http://192.168.49.2:31877 |
+|-----------|-----------|-------------|---------------------------|
+🏃  Starting tunnel for service first-app.
+|-----------|-----------|-------------|------------------------|
+| NAMESPACE |   NAME    | TARGET PORT |          URL           |
+|-----------|-----------|-------------|------------------------|
+| default   | first-app |             | http://127.0.0.1:54774 |
+|-----------|-----------|-------------|------------------------|
+🎉  Opening service default/first-app in default browser...
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+
+- Scaling pods in specific deployment (create 3 the same pods). It helps if one pod crash, other will work
+kubectl scale deployment/first-app --replicas=3
+
+- Update deployment with new changes(update image and push it into remote repo). Pay attention version of image must be changed(tag ':2'), otherwise deployment will not pull new image version!!!!
+docker build -t forelock/kub-first-app:2 .
+docker push forelock/kub-first-app:2
+kubectl set image deployment/first-app kub-first-app=forelock/kub-first-app:2
+// view/check updating status
+kubectl rollout status deployment/first-app
+
+- Roll back bad changes after setting them into deployment:
+kubectl rollout undo deployment/first-app
+
+- Get history of deployments:
+kubectl rollout history deployment/first-app
+
+- Get detailed info about particular revision (to see for example image version)
+kubectl rollout history deployment/first-app --revision=3
+
+- Roll bach to specific revision
+kubectl rollout undo deployment/first-app --to-revision=1
+
+- Delete deployment
+kubectl delete deployment first-app
+
