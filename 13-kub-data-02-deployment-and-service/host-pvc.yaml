@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
-metadatda:
+metadata:
   name: host-pvc
 spec:
   volumeName: host-pv
   accessModes:
     - ReadWriteOnce
+  storageClassName: standart
   resources:
     requests:
       storage: 1Gi # equal or less than in host-pv.yaml

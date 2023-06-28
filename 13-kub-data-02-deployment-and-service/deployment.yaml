@@ -24,4 +24,4 @@ spec:
           #   path: /data
           #   type: DirectoryOrCreate
           persistentVolumeClaim:
-            claimNmae: host-pvc
+            claimName: host-pvc

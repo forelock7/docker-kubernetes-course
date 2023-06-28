@@ -682,3 +682,29 @@ Section 13: Managing Data & Volumes with Kubernetes
 - Persistent Volumes is Pod- and Node-independent Volumes. 
 - Persistent Volume is in Cluster, but it doesn't belong any Node.
 - Nods can have 'Persistent Volume Claim' to Persistent Volume
+
+- Get Storage Classes - provides info about volumes configuration
+kubectl get sc
+
+- Storage Class Name is configured in Persistent Volume and Persistent Volume Claim conf files
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: host-pv
+spec:
+  capacity:
+    storage: 1Gi
+  # volumeMode: Block
+  volumeMode: Filesystem
+  storageClassName: standart
+
+  - Applying Persistent Volume configuration
+  kubectl apply -f=host-pv.yaml
+  kubectl apply -f=host-pvc.yaml
+  kubectl apply -f=deployment.yaml
+
+  - Get all Persistent Volumes
+  kubectl get pv 
+
+  - Get all Persistent Volume Claims
+  kubectl get pvc
