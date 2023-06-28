@@ -633,7 +633,7 @@ kubectl delete -f=deployment.yaml -f=service.yaml
 kubectl apply -f=master-deployment.yaml
 minikube service backend
 
-- delete objects by labels
+- delete objects by labels. Following code will delete service with file 12-kub-action-01-starting-setup/service.yaml
 kubectl delete deployments,services -l group=example
 
 - you can configure the way how kubernetes will check health of pods, instead of default mechanism
@@ -650,3 +650,20 @@ kubectl delete deployments,services -l group=example
 ////////////////////////////////////////////////////////////////////////////////////////////
 Section 13: Managing Data & Volumes with Kubernetes
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+- Local volumes and cloud-provider volumes
+- Volumes are the part of pod
+
+- Define volume and mount it in specific contaimer in yaml file. 'emptyDir' - one of the type of volumes in Kubernetes
+    spec:
+      containers:
+        - name: story
+          image: forelock/kub-data-demo:1
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          emptyDir: {}
+
+- 'emptyDir' driver creates empty directory per pod. So if we use replicas, will get several directories in different pods
