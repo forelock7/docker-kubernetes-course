@@ -668,11 +668,17 @@ Section 13: Managing Data & Volumes with Kubernetes
 
 - 'emptyDir' driver creates empty directory per pod. So if we use replicas, will get several directories in different pods
 
-- 'hostPath' type directory on local machine. 'Directory' - uses existing dir or 'DirectoryOrCreate' - uses existing dir or create one if it's absent
+- 'hostPath' type - directory on local machine. 'Directory' - uses existing dir or 'DirectoryOrCreate' - uses existing dir or create one if it's absent
       volumes:
         - name: story-volume
           hostPath:
             path: /data
             type: DirectoryOrCreate
 
-            
+- 'csi' can be used with AWS. very flexible solution
+
+- 'emptyDir' volume are destroyed when a Pod is removed. 'hostPath' partially works around that in "One-Node" environmentas (like minikube env)
+
+- Persistent Volumes is Pod- and Node-independent Volumes. 
+- Persistent Volume is in Cluster, but it doesn't belong any Node.
+- Nods can have 'Persistent Volume Claim' to Persistent Volume
