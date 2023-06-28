@@ -8,9 +8,9 @@ spec:
   # volumeMode: Block
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce # only for single Node
+    - ReadWriteOnce # only for single Node (minikube)
     # - ReadOnlyMany # multiple Nodes
-    # - ReadWrighteMany # multiple Nodes
+    # - ReadWriteMany # multiple Nodes
   hostPath:
     path: /data
     type: DirectoryOrCreate
