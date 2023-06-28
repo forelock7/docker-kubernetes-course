@@ -667,3 +667,12 @@ Section 13: Managing Data & Volumes with Kubernetes
           emptyDir: {}
 
 - 'emptyDir' driver creates empty directory per pod. So if we use replicas, will get several directories in different pods
+
+- 'hostPath' type directory on local machine. 'Directory' - uses existing dir or 'DirectoryOrCreate' - uses existing dir or create one if it's absent
+      volumes:
+        - name: story-volume
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
+
+            
