@@ -708,3 +708,15 @@ spec:
 
   - Get all Persistent Volume Claims
   kubectl get pvc
+
+  - Normal Volumes:
+  1. attached to Pod. 
+  2. Defined and created together with Pod
+  3. Repetitive and hard to administrate on global level
+
+  - Persistent Volume:
+  1. Standalone Cluster resource (NOT attached to Pod)
+  2. Created standalone, claimed via a pvc
+  3. Can be defined once and used multiple times
+
+  
