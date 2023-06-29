@@ -17,6 +17,4 @@ spec:
           image: forelock/kub-demo-users:latest
           env:
             - name: AUTH_ADDRESS
-              value: localhost
-        - name: auth
-          image: forelock/kub-demo-auth:latest
+              value: "10.108.145.82"

@@ -738,3 +738,18 @@ kubectl get services
 
 - open app by service using minikube ('users-service' - name of service)
 minikube service users-service
+
+- 'ClusterIP' type is used for services if we don't want to expose it Externally!!!! Just to use it in Pod-internal communication (only inside Cluster)
+
+- Kebernetes creates automatically service url env variable
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+'auth-service' + '_SERVISE_HOST' ----->  process.env.AUTH_SERVICE_SERVICE_HOST
+---------
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+'users-service' + '_SERVISE_HOST' -----> process.env.USERS_SERVICE_SERVICE_HOST
