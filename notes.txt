@@ -563,7 +563,7 @@ kubectl get services
 - type of exposing:
 + --type=ClusterIP (by default and created automatically)
 + --type=NodePort
-+ --type=LoadBalancer 
++ --type=LoadBalancer  (most usefull)
 
 - Open deployed app locally run following command and get :
 minikube service first-app
@@ -719,4 +719,22 @@ spec:
   2. Created standalone, claimed via a pvc
   3. Can be defined once and used multiple times
 
-  
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 14: Kubernetes Networking
+////////////////////////////////////////////////////////////////////////////////////////////
+
+- Cluster with 2 Pods:
+Pod 1: Auth API and UserAPI Containers have Pod-internal communication
+Pod 2: Task API
+
+- Create Service and expose port from container
+kubectl expose deployment first-app --type=LoadBalancer --port=8080
+kubectl get services
+
+- type services:
++ --type=ClusterIP (by default and created automatically)
++ --type=NodePort
++ --type=LoadBalancer  (most usefull)
+
+- open app by service using minikube ('users-service' - name of service)
+minikube service users-service
