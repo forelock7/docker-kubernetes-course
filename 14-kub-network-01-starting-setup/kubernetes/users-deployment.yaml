@@ -17,4 +17,5 @@ spec:
           image: forelock/kub-demo-users:latest
           env:
             - name: AUTH_ADDRESS
-              value: "10.108.145.82"
+              # value: "10.108.145.82"
+              value: "auth-service.default"

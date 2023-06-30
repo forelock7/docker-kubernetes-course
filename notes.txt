@@ -753,3 +753,12 @@ kind: Service
 metadata:
   name: users-service
 'users-service' + '_SERVISE_HOST' -----> process.env.USERS_SERVICE_SERVICE_HOST
+
+- Domain can be used for services: "service_name.namespace":
+    spec:
+      containers:
+        - name: users
+          image: forelock/kub-demo-users:latest
+          env:
+            - name: AUTH_ADDRESS
+              value: "auth-service.default"
