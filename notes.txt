@@ -742,19 +742,19 @@ minikube service users-service
 - 'ClusterIP' type is used for services if we don't want to expose it Externally!!!! Just to use it in Pod-internal communication (only inside Cluster)
 
 - Kebernetes creates automatically service url env variable
-apiVersion: v1
-kind: Service
-metadata:
-  name: auth-service
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: auth-service
 'auth-service' + '_SERVISE_HOST' ----->  process.env.AUTH_SERVICE_SERVICE_HOST
 ---------
-apiVersion: v1
-kind: Service
-metadata:
-  name: users-service
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: users-service
 'users-service' + '_SERVISE_HOST' -----> process.env.USERS_SERVICE_SERVICE_HOST
 
-- Domain can be used for services: "service_name.namespace":
+- Domain can be used for services: "service_name.namespace" - the most popular way to configure services!!!!!:
     spec:
       containers:
         - name: users
@@ -762,3 +762,6 @@ metadata:
           env:
             - name: AUTH_ADDRESS
               value: "auth-service.default"
+
+- For each service need to open connection with minikube service ti interect with it externally (to reach it externaly, e.g. send http request)
+minikube service tasks-service
