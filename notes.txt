@@ -679,7 +679,7 @@ Section 13: Managing Data & Volumes with Kubernetes
 
 - 'emptyDir' volume are destroyed when a Pod is removed. 'hostPath' partially works around that in "One-Node" environmentas (like minikube env)
 
-- Persistent Volumes is Pod- and Node-independent Volumes. 
+- Persistent Volumes are Pod- and Node-independent Volumes. 
 - Persistent Volume is in Cluster, but it doesn't belong any Node.
 - Nods can have 'Persistent Volume Claim' to Persistent Volume
 
@@ -754,7 +754,7 @@ minikube service users-service
     name: users-service
 'users-service' + '_SERVISE_HOST' -----> process.env.USERS_SERVICE_SERVICE_HOST
 
-- Domain can be used for services: "service_name.namespace" - the most popular way to configure services!!!!!:
+- Domain can be used for services: "service_name.namespace" - the most popular way to configure services!!!!!
     spec:
       containers:
         - name: users
@@ -765,3 +765,16 @@ minikube service users-service
 
 - For each service need to open connection with minikube service ti interect with it externally (to reach it externaly, e.g. send http request)
 minikube service tasks-service
+
+-  Reverse Proxy - you can use  "service_name.namespace" in nginx conig file and map it to the 'api' path
+
+- 'kops' - https://github.com/kubernetes/kops - tool to setup all resources on cloud (kinda minikube for one node app).
+
+////////////////////////////////////////////////////////////////////////////////////////////
+Section 15: Kubernetes - Deployment (AWS EKS)
+////////////////////////////////////////////////////////////////////////////////////////////
+
+- AWS ECS - Elastic Container Service
+- AWS EKS - Elastic Kubernetes Service
+
+- Volume in AWS can be created with CSI
